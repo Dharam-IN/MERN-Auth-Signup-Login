@@ -7,14 +7,25 @@ const Registerpage = () => {
             <div className="card">
                 <h2>Register Form</h2>
                 <form>
-                    <label for="fullname">Full Name</label>
-                    <input type="text" id="fullname" placeholder="Enter your full name"/>
+                    <div>
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" placeholder="Enter your full name"/>
+                    </div>
 
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="Enter your email"/>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter your email"/>
+                    </div>
 
-                    <label for="new-password">New Password</label>
-                    <input type="password" id="new-password" placeholder="Enter your new password"/>
+                    <div>
+                        <label for="new-password">Password</label>
+                        <input type="password" id="new-password" placeholder="Enter your password"/>
+                    </div>
+
+                    <div>
+                        <label for="retype-password">Reenter Password</label>
+                        <input type="password" id="retype-password" placeholder="Retype Password"/>
+                    </div>
 
                     <button type="submit">Register</button>
                 </form>
