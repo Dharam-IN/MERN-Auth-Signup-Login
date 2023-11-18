@@ -21,7 +21,14 @@
     outline: none;
     cursor: pointer;
 }
-
+.button {
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;

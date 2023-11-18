@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import './css/style.css'
+import './css/style.css';
+// import axios from axios;
 
 const Registerpage = () => {
 
@@ -18,6 +19,17 @@ const Registerpage = () => {
             ...user,
             [name]: value
         })
+    }
+
+    const register = ()=>{
+        const {name, email, password, reEnterPassword} = user;
+        
+        if(name && email && password && (password === reEnterPassword)){
+            alert("Posted")
+            // axios.post("http://localhost:9002/register", user)
+        }else{
+            alert("Invalid value")
+        }
     }
 
     return (
@@ -46,7 +58,7 @@ const Registerpage = () => {
                         <input type="password" id="retype-password" name="reEnterPassword" value={user.reEnterPassword} placeholder="Retype Password" onChange={handleChange}/>
                     </div>
 
-                    <button type="submit">Register</button>
+                    <div className="button" onClick={register}>Register</div>
                 </form>
                 <div className="switch">Already have an account? <a href="/" onclick="switchCard()" >Login here</a></div>
             </div>
