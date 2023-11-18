@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './css/style.css';
-// import axios from axios;
+import axios from "axios";
 
 const Registerpage = () => {
 
@@ -25,8 +25,9 @@ const Registerpage = () => {
         const {name, email, password, reEnterPassword} = user;
         
         if(name && email && password && (password === reEnterPassword)){
-            alert("Posted")
-            // axios.post("http://localhost:9002/register", user)
+            // alert("Posted")
+            axios.post("http://localhost:9002/register", user)
+            .then( res => console.log(res) )
         }else{
             alert("Invalid value")
         }

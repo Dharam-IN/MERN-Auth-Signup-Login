@@ -40,7 +40,7 @@ app.post('/login', (req, res)=>{
 })
 
 app.post('/register', (req, res)=>{
-    res.send("My Register api")
+    console.log(req.body)
 })
 
 
