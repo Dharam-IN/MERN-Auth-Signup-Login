@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './css/style.css'
+import axios from "axios";
 
 const Loginpage = () => {
 
@@ -15,6 +16,11 @@ const Loginpage = () => {
             ...user,
             [name]: value
         })
+    }
+    
+
+    const login = ()=>{
+        axios.post("http://localhost:9002/login", user).then(res => alert(res))
     }
 
     return (
@@ -33,7 +39,7 @@ const Loginpage = () => {
                         <input type="password" id="password" name="password" value={user.password} placeholder="Enter your password" onChange={handleChange}/>
                     </div>
 
-                    <button type="submit">Login</button>
+                    <div className="button" onClick={login}>Login</div>
                 </form>
                 <div className="switch">Don't have an account? <a href="/" onclick="switchCard()">Register here</a></div>
             </div>

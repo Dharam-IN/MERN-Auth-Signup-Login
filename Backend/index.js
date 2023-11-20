@@ -31,32 +31,26 @@ const User = new mongoose.model("User", userSchema)
 
 // Routes
 
-app.post('/login', (req, res)=>{
-    res.send("My Login api")
+app.post('/login', async (req, res)=>{
+    const {email, password} = req.body;
+    try {
+        const user = User.findOne({email: email});
+        if(user){
+            if(password === user.password){
+                res.send({message: "Login Successfull", user: user})
+                console.log("Passwo are match")
+            }else{
+                res.send({message: "Password did't match"})
+                // alert("Wrong pass")
+                console.log("Passwo not match")
+            }
+        }else{
+            res.send({message: "User Not Registered"})
+        }
+    } catch (error) {
+        
+    }
 })
-
-// app.post('/register', (req, res)=>{
-//     const {name, email, password} = req.body;
-//     User.findOne({email: email}, (err, user)=>{
-//         if(user){
-//             res.send({message: "User Already Registerd"})
-//         }
-//         else{
-//             const user = new User({
-//                 name,
-//                 email,
-//                 password
-//             })
-//             user.save(err => {
-//                 if(err){
-//                     res.send(err)
-//                 }else{
-//                     res.send({message: "Successfully Registered"})
-//                 }
-//             })
-//         }
-//     })
-// })
 
 app.post("/register", async (req, res) =>{
     const {name, email, password} = req.body;
