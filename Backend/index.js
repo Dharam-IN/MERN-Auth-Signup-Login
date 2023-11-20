@@ -9,8 +9,8 @@ app.use(express.urlencoded())
 
 app.use(cors())
 
-mongoose.connect('mongodb://127.0.0.1:27017/myLoginRegisterDB', 
-    {useNewUrlParser: true, useUniFiedTopology: true}).then(()=>{
+mongoose.connect('mongodb://127.0.0.1:27017/myLoginRegisterDB')
+    .then(()=>{
         console.log("Connected to MongoDB")
 
         app.listen(9002, ()=>{
@@ -31,16 +31,53 @@ const User = new mongoose.model("User", userSchema)
 
 // Routes
 
-// app.get('/', (req, res)=>{
-//     res.send("My api")
-// })
-
 app.post('/login', (req, res)=>{
     res.send("My Login api")
 })
 
-app.post('/register', (req, res)=>{
-    console.log(req.body)
-})
+// app.post('/register', (req, res)=>{
+//     const {name, email, password} = req.body;
+//     User.findOne({email: email}, (err, user)=>{
+//         if(user){
+//             res.send({message: "User Already Registerd"})
+//         }
+//         else{
+//             const user = new User({
+//                 name,
+//                 email,
+//                 password
+//             })
+//             user.save(err => {
+//                 if(err){
+//                     res.send(err)
+//                 }else{
+//                     res.send({message: "Successfully Registered"})
+//                 }
+//             })
+//         }
+//     })
+// })
 
+app.post("/register", async (req, res) =>{
+    const {name, email, password} = req.body;
+
+    try {
+        const user = await User.findOne({email: email});
+
+        if(user){
+            res.send({message: "User Already Registered"})
+        }else{
+            const user = new User({
+                name,
+                email,
+                password
+            });
+
+            await user.save();
+            res.send({message: "Successfully Registered"})
+        }
+    } catch (error) {
+        res.status(500).send({ error: "Internal Server Error" });
+    }
+})
 
