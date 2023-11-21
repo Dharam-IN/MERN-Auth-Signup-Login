@@ -31,26 +31,31 @@ const User = new mongoose.model("User", userSchema)
 
 // Routes
 
-app.post('/login', async (req, res)=>{
-    const {email, password} = req.body;
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
     try {
-        const user = User.findOne({email: email});
-        if(user){
-            if(password === user.password){
-                res.send({message: "Login Successfull", user: user})
-                console.log("Passwo are match")
-            }else{
-                res.send({message: "Password did't match"})
-                // alert("Wrong pass")
-                console.log("Passwo not match")
+        const user = await User.findOne({ email: email });
+        console.log(user);
+
+        if (user) {
+            if (password === user.password) {
+                res.send({ message: "Login Successful", user: user });
+                console.log("Password matches");
+            } else {
+                res.send({ message: "Password didn't match" });
+                console.log("Password doesn't match");
             }
-        }else{
-            res.send({message: "User Not Registered"})
+        } else {
+            res.send({ message: "User Not Registered" });
         }
     } catch (error) {
-        
+        console.error("Error: ", error);
+        res.status(500).send({ message: "Internal Server Error" });
     }
-})
+});
+
+
+
 
 app.post("/register", async (req, res) =>{
     const {name, email, password} = req.body;

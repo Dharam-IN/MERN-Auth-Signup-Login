@@ -20,7 +20,9 @@ const Loginpage = () => {
     
 
     const login = ()=>{
-        axios.post("http://localhost:9002/login", user).then(res => alert(res))
+        // axios.post("http://localhost:9002/login", user).then(res => alert(res))
+        axios.post("http://localhost:9002/login", user)
+            .then( res => console.log(res) )
     }
 
     return (
@@ -31,7 +33,7 @@ const Loginpage = () => {
                 <form>
                     <div>
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" value={user.username} placeholder="Enter your username" onChange={handleChange}/>
+                        <input type="email" id="username" name="username" value={user.username} placeholder="Enter your username" onChange={handleChange}/>
                     </div>
 
                     <div>
